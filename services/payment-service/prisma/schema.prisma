@@ -13,9 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Statusenum {
+  PENDING
+  SUCCESS
+  FAILED
+}
 
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
+model Payment {
+  id         String  @id @default(uuid())
+  orderId    String
+  amount     Float
+  status     Statusenum @default(PENDING)
+  createdAt  DateTime @default(now())
 }

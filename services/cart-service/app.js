@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const passportConfig = require('./src/config/passport');
+// const passportConfig = require('./src/config/passport');
 const app = express();
 
-const { swaggerUi, swaggerDocs } = require('./src/config/swagger'); 
+// const { swaggerUi, swaggerDocs } = require('./src/config/swagger'); 
 
 
 // Middleware
@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(compression());
 
-app.use(passportConfig.initialize());
+// app.use(passportConfig.initialize());
 
 const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173'];
 
@@ -35,7 +35,7 @@ app.use(cors({
 // Routes
 
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 app.get('/',(req,res)=>{
