@@ -13,9 +13,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  Pending
+  Completed
+  Cancelled
+}
 
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
+model Order {
+  id          String      @id @default(uuid())
+  userId      String
+  userName    String
+  userEmail   String
+  items       OrderItem[]
+  totalAmount Float
+  status      Status      @default(Pending)
+  createdAt   DateTime    @default(now())
+}
+
+model OrderItem {
+  id           String @id @default(uuid())
+  orderId      String
+  productId    String
+  productName  String
+  productPrice Float
+  quantity     Int
+  Order        Order  @relation(fields: [orderId], references: [id])
 }
