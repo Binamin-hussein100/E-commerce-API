@@ -14,8 +14,23 @@ datasource db {
 }
 
 
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
+enum Status {
+  PENDING   // e.g., email sent, sms sent, push notification sent
+  SENT     // e.g., email sent, sms sent, push notification sent
+  FAILED    // e.g., email failed to send, sms failed to send, push notification failed to send
+}
+
+enum NotificationType {
+  Email      // e.g., welcome email, password reset email
+  SMS        // e.g., welcome SMS, password reset SMS
+  PushNotification  // e.g., welcome push notification, password reset push notification
+}
+
+model Notification {
+  id          String  @id @default(uuid())
+  userId      String
+  type        NotificationType 
+  message     String
+  status      Status  @default(PENDING)
+  createdAt   DateTime @default(now())
 }
