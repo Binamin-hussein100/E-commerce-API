@@ -53,7 +53,7 @@ jobs:
       - name: Build and push Docker image
         working-directory: services/${{ matrix.service }}
         run: |
-          docker build -t $DOCKER_USERNAME/${{ matrix.service }}:${{ github.sha }}
+          docker build -t $DOCKER_USERNAME/${{ matrix.service }}:${{ github.sha }} .
           docker push $DOCKER_USERNAME/${{ matrix.service }}:${{ github.sha }}
 
       # Deploy to Kubernetes
