@@ -34,7 +34,7 @@ jobs:
       
       # install dependencies
       - name: Install dependencies
-        working-directory: services/${{matrix.service}}
+        working-directory: ./services/${{matrix.service}}
         run: npm install
 
       # Run test
@@ -51,14 +51,14 @@ jobs:
 
       # Build and push Docker image
       - name: Build and push Docker image
-        working-directory: services/{{matrix.service}}
+        working-directory: ./services/{{matrix.service}}
         run: |
           docker build -t $DOCKER_USERNAME/${{ matrix.service }}:${{ github.sha }} .
           docker push $DOCKER_USERNAME/${{ matrix.service }}:${{ github.sha }}
 
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
-        working-directory: services/${{matrix.service}}
+        working-directory: ./services/${{matrix.service}}
         run: |
 
 
