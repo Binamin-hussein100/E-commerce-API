@@ -23,6 +23,17 @@ jobs:
           
     steps:
       # check out the code
+      - name: Notify slack - Pipeline Started 
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" --data '{
+              "text": "🚀 Build and deploy started for service: '${{ matrix.service }}'",
+              "channel": "#devops",
+              "username": "Engineer-Bot",
+              "icon_emoji": ":construction:"
+          }' $SLACK_WEBHOOK_URL
+
       - name: checkout code
         uses: actions/checkout@v3
 
@@ -61,6 +72,33 @@ jobs:
       - name: Deploy to Kubernetes
         working-directory: services/${{ matrix.service }}
         run: |
+
+      # Notify on Slack - Success
+      - name: Notify Slack - Success
+        if: success()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "✅ Build and deploy succeeded for service: '${{ matrix.service }}'",
+            "channel": "#devops",
+            "username": "Engineer-Bot",
+            "icon_emoji": ":white_check_mark:"
+          }' $SLACK_WEBHOOK_URL
+
+      # Notify on Slack - Failure
+        # Notify on Slack - Failure
+      - name: Notify Slack - Failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "❌ Build and deploy failed for service: '${{ matrix.service }}'. Check the logs for details.",
+            "channel": "#devops",
+            "username": "Engineer-Bot",
+            "icon_emoji": ":x:"
+          }' $SLACK_WEBHOOK_URL
 
 
 
