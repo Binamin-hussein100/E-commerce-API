@@ -66,7 +66,7 @@ The platform consists of multiple independent microservices, each handling speci
 ### **Backend Development**
 - **Node.js**: Backend framework for API development.
 - **Prisma**: ORM for database interaction.
-- **MongoDB**: NoSQL database for services requiring document storage.
+- **PostgreSQL**: Database for services requiring document storage.
 - **Redis**: In-memory data store for caching.
 
 ### **Containerization and Orchestration**
@@ -76,7 +76,7 @@ The platform consists of multiple independent microservices, each handling speci
 ### **DevOps Tools**
 - **GitHub Actions**: CI/CD pipeline for automated builds and deployments.
 - **Prometheus & Grafana**: Monitoring and visualization of metrics.
-- **NGINX**: Reverse proxy and API Gateway.
+- **NGINX**: API Gateway.
 
 ---
 
@@ -95,8 +95,8 @@ For each service:
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-name>
+   git clone <git@github.com:Binamin-hussein100/E-commerce-API.git>
+   cd <E-commerce-API>
    ```
 
 2. Install dependencies for each service:
@@ -118,10 +118,9 @@ For each service:
 ### **1. Prerequisites**
 - Install **Docker** and **Kubernetes**.
 - Install **kubectl** for interacting with Kubernetes clusters.
-- Install **Helm** for managing Kubernetes applications (optional).
 
 ### **2. Set Up Kubernetes Cluster**
-- Use Minikube or any managed Kubernetes service (e.g., GKE, EKS, AKS).
+- Use Minikube.
 - Verify the cluster is running:
   ```bash
   kubectl get nodes
