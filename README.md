@@ -18,13 +18,58 @@ The platform consists of multiple independent microservices, each handling speci
 ```plaintext
 /your-project-root
 │
+├── .github
+│   └── workflows
+│       └── ci-cd.yml
+│
 ├── services
 │   ├── order-service
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── src
+│   │   │   └── index.js
+│   │   └── docker-compose.yml
+│   │
 │   ├── product-service
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── src
+│   │   │   └── index.js
+│   │   └── docker-compose.yml
+│   │
 │   ├── payment-service
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── src
+│   │   │   └── index.js
+│   │   └── docker-compose.yml
+│   │
 │   ├── user-service
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── src
+│   │   │   └── index.js
+│   │   └── docker-compose.yml
+│   │
 │   ├── cart-service
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── src
+│   │   │   └── index.js
+│   │   └── docker-compose.yml
+│   │
 │   └── notification-service
+│       ├── Dockerfile
+│       ├── package.json
+│       ├── package-lock.json
+│       ├── src
+│       │   └── index.js
+│       └── docker-compose.yml
 │
 └── k8s
     ├── order-service
@@ -32,26 +77,31 @@ The platform consists of multiple independent microservices, each handling speci
     │   ├── green-deployment.yaml
     │   ├── service.yaml
     │   └── ingress.yaml
+    │
     ├── product-service
     │   ├── blue-deployment.yaml
     │   ├── green-deployment.yaml
     │   ├── service.yaml
     │   └── ingress.yaml
+    │
     ├── payment-service
     │   ├── blue-deployment.yaml
     │   ├── green-deployment.yaml
     │   ├── service.yaml
     │   └── ingress.yaml
+    │
     ├── user-service
     │   ├── blue-deployment.yaml
     │   ├── green-deployment.yaml
     │   ├── service.yaml
     │   └── ingress.yaml
+    │
     ├── cart-service
     │   ├── blue-deployment.yaml
     │   ├── green-deployment.yaml
     │   ├── service.yaml
     │   └── ingress.yaml
+    │
     └── notification-service
         ├── blue-deployment.yaml
         ├── green-deployment.yaml
