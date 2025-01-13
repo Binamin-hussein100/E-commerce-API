@@ -1,0 +1,19 @@
+# ingress to expose the application
+#  Ingress resource that exposes the order service to external traffic. 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: order-ingress
+  namespace: order-service
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: order-s-service
+            port:
+              number: 80

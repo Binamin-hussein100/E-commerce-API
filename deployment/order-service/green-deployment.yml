@@ -1,0 +1,56 @@
+#  The new version of the application that is being tested and prepared for deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-green 
+  namespace: order-service
+  labels:
+    app: order-service
+    environment: green
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-service
+      environment: green
+  template:
+    metadata:
+      labels:
+        app: order-service
+        environment: green
+    spec:
+      containers:
+      - name: order-service
+        image: order-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: order-db-secret
+              key: url
+
+      - name: postgres-db
+        image: postgres:14
+        ports:
+          - containerPort: 5432
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+            secretKeyRef:
+              name: order-db-secret
+              key: user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: order-db-secret
+                key: password
+          - name: POSTGRES_DB
+            valueFrom:
+            secretKeyRef:
+              name: order-db-secret
+              key: database
+

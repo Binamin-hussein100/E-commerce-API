@@ -1,0 +1,15 @@
+# Service to route traffic to either blue or green environment
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-s-service
+  namespace: order-service
+spec:
+  selector:
+    app: order-service
+    environment: blue # initially routes to blue
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

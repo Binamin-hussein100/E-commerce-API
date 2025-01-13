@@ -86,7 +86,6 @@ jobs:
             "icon_emoji": ":white_check_mark:"
           }' $SLACK_WEBHOOK_URL
 
-      # Notify on Slack - Failure
         # Notify on Slack - Failure
       - name: Notify Slack - Failure
         if: failure()
