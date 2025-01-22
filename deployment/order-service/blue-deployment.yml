@@ -1,14 +1,11 @@
-# live version of the application that users interact with
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-blue 
+  name: order-blue
   namespace: order-service
   labels:
     app: order-service
     environment: blue
-
 spec:
   replicas: 3
   selector:
@@ -23,34 +20,32 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: order-service:latest
+        image: binamin/order-service:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
         env:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               name: order-db-secret
               key: url
-
-      - name: postgres-db
-        image: postgres:14
-        ports:
-          - containerPort: 5432
-        env:
-          - name: POSTGRES_USER
-            valueFrom:
-            secretKeyRef:
-              name: order-db-secret
-              key: user
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: order-db-secret
-                key: password
-          - name: POSTGRES_DB
-            valueFrom:
-            secretKeyRef:
-              name: order-db-secret
-              key: database
-
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+     

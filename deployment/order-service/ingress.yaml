@@ -8,10 +8,11 @@ metadata:
   namespace: order-service
 spec:
   rules:
-  - host: localhost
+  - host: order-service.local
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
           service:
             name: order-s-service
