@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-blue
-  namespace: order-service
+  name: user-blue
+  namespace: user-service
   labels:
-    app: order-service
+    app: user-service
     environment: blue
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: order-service
+      app: user-service
       environment: blue
   template:
     metadata:
       labels:
-        app: order-service
+        app: user-service
         environment: blue
     spec:
       containers:
-      - name: order-service
-        image: binamin/order-service:latest
+      - name: user-service
+        image: binamin/user-service:latest
         ports:
-        - containerPort: 4000
+        - containerPort: 3000
         env:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: order-db-secret
+              name: user-db-secret
               key: url
         resources:
           requests:

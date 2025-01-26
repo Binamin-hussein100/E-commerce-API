@@ -1,0 +1,5 @@
+# Namespaces are used to organize resources in a cluster and can help in managing access and resource allocation.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: payment-service

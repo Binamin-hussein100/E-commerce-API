@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-blue
-  namespace: order-service
+  name: notification-green
+  namespace: notification-service
   labels:
-    app: order-service
-    environment: blue
+    app: notification-service
+    environment: green
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: order-service
-      environment: blue
+      app: notification-service
+      environment: green
   template:
     metadata:
       labels:
-        app: order-service
-        environment: blue
+        app: notification-service
+        environment: green
     spec:
       containers:
-      - name: order-service
-        image: binamin/order-service:latest
+      - name: notification-service
+        image: binamin/notification-service:latest
         ports:
-        - containerPort: 4000
+        - containerPort: 8000
         env:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: order-db-secret
+              name: notification-db-secret
               key: url
         resources:
           requests:

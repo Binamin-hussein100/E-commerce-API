@@ -1,0 +1,20 @@
+# ingress to expose the application
+#  Ingress resource that exposes the notification service to external traffic. 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notification-ingress
+  namespace: notification-service
+spec:
+  rules:
+  - host: notification-service.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: notification-s-service
+            port:
+              number: 80

@@ -3,13 +3,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-s-service
-  namespace: order-service
+  name: cart-s-service
+  namespace: cart-service
 spec:
   selector:
-      app: order-service
+      app: cart-service
       environment: blue # initially routes to blue
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 4000
+      targetPort: 7000

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-blue
+  name: order-green
   namespace: order-service
   labels:
     app: order-service
-    environment: blue
+    environment: green
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: order-service
-      environment: blue
+      environment: green
   template:
     metadata:
       labels:
         app: order-service
-        environment: blue
+        environment: green
     spec:
       containers:
       - name: order-service

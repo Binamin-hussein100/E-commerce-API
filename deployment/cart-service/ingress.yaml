@@ -1,0 +1,20 @@
+# ingress to expose the application
+#  Ingress resource that exposes the cart service to external traffic. 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cart-ingress
+  namespace: cart-service
+spec:
+  rules:
+  - host: cart-service.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cart-s-service
+            port:
+              number: 80
