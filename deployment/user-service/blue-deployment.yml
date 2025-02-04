@@ -7,7 +7,7 @@ metadata:
     app: user-service
     environment: blue
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: user-service
@@ -32,10 +32,10 @@ spec:
         resources:
           requests:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "20m"
           limits:
             memory: "256Mi"
-            cpu: "1000m"
+            cpu: "50m"
         livenessProbe:
           httpGet:
             path: /healthz
