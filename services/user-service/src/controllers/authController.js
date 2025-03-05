@@ -16,7 +16,7 @@ function generateTokens(payload) {
 }
 
 // User sign up
-async function newUser(req, res) {
+async function newUser(req, res, prisma) {
     const { email, name, tel, password } = req.body;
 
     try {
@@ -104,7 +104,7 @@ async function newUser(req, res) {
 // }
 
 // User sign in
-async function userSignIn(req, res) {
+async function userSignIn(req, res, prisma) {
     const { email, password } = req.body;
 
     try {
@@ -196,4 +196,4 @@ const checkAuth = (req, res) => {
     }
 };
 
-module.exports = { newUser, newAdmin, userSignIn, adminSignIn, checkAuth, logOut };
+module.exports = { newUser, userSignIn, checkAuth, logOut, prisma };
