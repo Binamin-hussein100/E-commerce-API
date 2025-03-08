@@ -49,9 +49,9 @@ jobs:
         run: npm install
 
       # Run test
-      # - name: Run tests
-      #   working-directory: services/${{matrix.service}}
-      #   run: npm test
+      - name: Run tests
+        working-directory: services/${{matrix.service}}
+        run: npm test
 
       # Log in to DockerHub
       - name: Log in to DockerHub
