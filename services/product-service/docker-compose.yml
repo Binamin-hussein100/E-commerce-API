@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
     product-service:
+      container_name: product-service
       build: 
           context: .
           dockerfile: Dockerfile

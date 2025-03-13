@@ -3,33 +3,43 @@ const {PrismaClient} = require("@prisma/client")
 const prisma = new PrismaClient();
 
 
-async function createProduct(req, res, next){
-    const {name, price, stock} = req.body
+async function createProduct(req, res, next) {
+    const { name, price, stock } = req.body;
 
     try {
-        const productExists = await prisma.product.findUnique({
-            where:{name}
-        })
+        const productExists = await prisma.product.findFirst({  // Use findFirst()
+            where: { name }
+        });
 
-        if(productExists){
+        if (productExists) {
             return res.status(400).json({
-                message:"Product already exists"
-            })
+                message: "Product already exists"
+            });
         }
+
         const product = await prisma.product.create({
-            name,
-            price,
-            stock, 
-            createdAt: new Date()
-        }) 
+            data: {  
+                name,
+                price: parseInt(price),
+                stock: parseInt(stock),
+                createdAt: new Date()
+            }
+        });
+
         res.status(201).json({
             message: "Product successfully created",
             productData: product
-        })
+        });
+
     } catch (error) {
-        
+        console.error("Error creating product:", error);
+        res.status(500).json({
+            message: "Something went wrong",
+            error: error.message
+        });
     }
 }
+
 
 async function getAllProducts(req,res, next){
     try {

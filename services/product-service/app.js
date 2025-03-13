@@ -4,7 +4,7 @@ const compression = require('compression');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
-
+const productRoutes  = require("./src/routes/productRoutes")
 // const { swaggerUi, swaggerDocs } = require('./src/config/swagger'); 
 
 
@@ -31,13 +31,12 @@ app.use(cors({
 }));
 
 // Routes
-
+app.use("/products", productRoutes)
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 app.get('/',(req,res)=>{
-    console.log(process.env.DATABASE_URL)
     res.send("Hello: DONE")
   })  
 
