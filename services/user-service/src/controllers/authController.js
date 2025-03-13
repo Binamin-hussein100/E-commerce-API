@@ -16,7 +16,7 @@ function generateTokens(payload) {
 }
 
 // User sign up
-async function newUser(req, res, prisma) {
+async function newUser(req, res) {
     const { email, name, tel, password } = req.body;
 
     try {
@@ -104,14 +104,19 @@ async function newUser(req, res, prisma) {
 // }
 
 // User sign in
-async function userSignIn(req, res, prisma) {
+async function userSignIn(req, res, ) {
     const { email, password } = req.body;
 
     try {
         const user = await prisma.user.findUnique({ where: { email } });
+     
+        if(!user){
+            return res.status(401).json({message: "Invalid credentials"})
+        }
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+        const isValidPassword = await bcrypt.compare(password, user.password)
+        if(!isValidPassword){
+            return res.status(401).json({message: "Invalid credentials"})
         }
 
         const tokens = generateTokens({ id: user.id, email: user.email });
@@ -196,4 +201,8 @@ const checkAuth = (req, res) => {
     }
 };
 
-module.exports = { newUser, userSignIn, checkAuth, logOut, prisma };
+const test = (req, res) => {
+    res.status(200).send("Test endpoint reached");
+};
+
+module.exports = { newUser, userSignIn, checkAuth, logOut, test, prisma };

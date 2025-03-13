@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const authRoutes = require("./src/routes/authRoute")
+const userRoutes = require("./src/routes/userRoutes")
 // const passportConfig = require('./src/config/passport');
 const app = express();
 
@@ -33,13 +35,13 @@ app.use(cors({
 }));
 
 // Routes
-
+app.use("/auth", authRoutes)
+app.use("/user", userRoutes)
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 app.get('/',(req,res)=>{
-    console.log(process.env.DATABASE_URL)
     res.send("Hello: DONE")
   })  
 
