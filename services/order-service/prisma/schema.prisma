@@ -24,7 +24,7 @@ model Order {
   userId      String
   userName    String
   userEmail   String
-  items       OrderItem[]
+  items       OrderItem[] @relation(onDelete: Cascade)
   totalAmount Float
   status      Status      @default(Pending)
   createdAt   DateTime    @default(now())
