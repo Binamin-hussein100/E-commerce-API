@@ -1,7 +1,7 @@
-version: '3.8'
 
 services:
     notification-service:
+      container_name: notification-service
       build: 
           context: .
           dockerfile: Dockerfile

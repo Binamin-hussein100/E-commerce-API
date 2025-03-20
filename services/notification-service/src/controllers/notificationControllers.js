@@ -32,8 +32,8 @@ async function createnotification(req, res, next) {
                 userId: userId,
                 type: type,
                 message: message,
-                status: "PENDING", // Default status
-                createdAt: new Date() // This is redundant if using default(now()) in Prisma schema
+                status: "PENDING", 
+                createdAt: new Date() 
             }
         });
 

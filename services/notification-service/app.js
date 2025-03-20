@@ -4,6 +4,7 @@ const compression = require('compression');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
+const notificationsRoutes = require("./src/routes/notificationRoutes")
 
 // const { swaggerUi, swaggerDocs } = require('./src/config/swagger'); 
 
@@ -32,7 +33,7 @@ app.use(cors({
 }));
 
 // Routes
-
+app.use('/notification', notificationsRoutes)
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
