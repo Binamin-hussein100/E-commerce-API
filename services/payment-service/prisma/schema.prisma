@@ -20,10 +20,11 @@ enum Statusenum {
 }
 
 model Payment {
-  id         String  @id @default(uuid())
-  orderId    String
-  amount     Float
+  id         Int  @id @default(autoincrement())
+  orderId    String  @unique
+  amount     Int
   status     Statusenum @default(PENDING)
   createdAt  DateTime @default(now())
-  editedAt   DateTime default(now())
+
+  @@map("Payment") 
 }

@@ -4,7 +4,7 @@ const compression = require('compression');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
-
+const paymentRoutes = require("./src/routes/paymentRoute") 
 // const { swaggerUi, swaggerDocs } = require('./src/config/swagger'); 
 
 
@@ -31,7 +31,7 @@ app.use(cors({
 }));
 
 // Routes
-
+app.use("/payments", paymentRoutes)
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 

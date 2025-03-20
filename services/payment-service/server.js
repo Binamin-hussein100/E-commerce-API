@@ -11,7 +11,7 @@ const app = require('./app')
 // ...Other middleware and route configurations...
 
 // Start the server
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 6000;
 
 app.listen(PORT, async () => {
   try {

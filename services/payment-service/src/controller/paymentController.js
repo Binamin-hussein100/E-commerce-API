@@ -7,27 +7,34 @@ async function createpayment(req, res, next){
     const {orderId, amount, status} = req.body
 
     try {
-        const paymentExists = await prisma.payment.findUnique({
-            where:{orderId}
+        const paymentExists = await prisma.payment.findFirst({
+            where:{ orderId }
         })
+        
 
         if(paymentExists){
             return res.status(400).json({
                 message:"payment already exists"
             })
         }
+        console.log("Received payment data:", req.body);
+
         const payment = await prisma.payment.create({
-            orderId,
-            amount,
-            status: 'Pending', 
-            createdAt: new Date()
+            data:{
+                orderId,
+                amount,
+                status, 
+            }
         }) 
         res.status(201).json({
             message: "payment successfully created",
             paymentData: payment
         })
     } catch (error) {
-        
+        console.error(error)
+        res.status(500).json({
+            message:"Failed to create payments."
+        })
     }
 }
 

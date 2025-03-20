@@ -24,4 +24,4 @@ COPY --from=build /app ./
 EXPOSE 6000
 
 # Command to run the app in development mode
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npm run db:deploy && npm run dev"]

@@ -1,10 +1,12 @@
 {
-  "name": "user-service",
+  "name": "payment-service",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
+
   },
   "keywords": [],
   "author": "",
