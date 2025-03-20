@@ -54,7 +54,8 @@ async function updateCart(req, res) {
                         create: item
                     }))
                 }
-            }
+            },
+            include: { items: true }
         });
         res.json(cart);
     } catch (error) {

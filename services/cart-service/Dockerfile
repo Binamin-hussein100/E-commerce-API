@@ -21,7 +21,7 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app ./
 
 # Expose application port
-EXPOSE 3000
+EXPOSE 7000
 
 # Command to run the app in development mode
 CMD ["npm", "run", "dev"]

@@ -1,7 +1,7 @@
-version: '3.8'
 
 services:
     cart-service:
+      container_name: cart-service
       build: 
           context: .
           dockerfile: Dockerfile
@@ -19,7 +19,7 @@ services:
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: ${POSTGRES_DB}
       ports:
-        - "5437:5432" # Host port 5437 -> Container port 5432 (PostgreSQL default)
+        - "5437:5432" 
       volumes:
         - postgres-data:/var/lib/postgresql/data
 
