@@ -17,7 +17,7 @@ function generateTokens(payload) {
 
 // User sign up
 async function newUser(req, res) {
-    const { email, name, tel, password } = req.body;
+    const { email, name, tel, password, role } = req.body;
 
     try {
         const userExists = await prisma.user.findUnique({ where: { email } });
@@ -34,6 +34,7 @@ async function newUser(req, res) {
                 name,
                 tel,
                 password: hashedPassword,
+                role: role || "customer"
             },
         });
 
@@ -119,7 +120,7 @@ async function userSignIn(req, res, ) {
             return res.status(401).json({message: "Invalid credentials"})
         }
 
-        const tokens = generateTokens({ id: user.id, email: user.email });
+        const tokens = generateTokens({ id: user.id, email: user.email, role: user.role });
 
         res.cookie('token', tokens.accessToken, {
             httpOnly: true,
