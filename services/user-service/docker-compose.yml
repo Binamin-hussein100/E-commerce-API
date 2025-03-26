@@ -13,6 +13,8 @@ services:
       command: npm run dev
       depends_on:
           - db
+      networks:
+          - ecommerceNetwork 
 
     db:
       image: postgres:14
@@ -24,6 +26,13 @@ services:
         - "5432:5432"
       volumes:
         - postgres-data:/var/lib/postgresql/data
+      networks:
+          - ecommerceNetwork 
+
 
 volumes:
   postgres-data: {}
+
+networks:
+  ecommerceNetwork:
+      external: true
