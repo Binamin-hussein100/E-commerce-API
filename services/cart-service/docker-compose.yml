@@ -11,6 +11,8 @@ services:
           DATABASE_URL: ${DATABASE_URL}
       depends_on:
           - cart-db
+      networks:
+          - ecommerceNetwork
 
     cart-db:
       image: postgres:14
@@ -22,6 +24,13 @@ services:
         - "5437:5432" 
       volumes:
         - postgres-data:/var/lib/postgresql/data
+      networks:
+          - ecommerceNetwork 
+
 
 volumes:
   postgres-data: {}
+
+networks:
+    ecommerceNetwork:
+        external: true
