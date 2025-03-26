@@ -12,6 +12,8 @@ services:
     depends_on:
       payment-db:
         condition: service_healthy
+    networks:
+      - ecommerceNetwork
 
   payment-db:
     container_name: payment-db
@@ -24,6 +26,10 @@ services:
       - "5434:5432"  
     volumes:
       - payment-service_postgres-data:/var/lib/postgresql/data  # Correct volume name
+    
+    networks:
+          - ecommerceNetwork 
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -32,3 +38,7 @@ services:
 
 volumes:
   payment-service_postgres-data: {}  
+
+networks:
+    ecommerceNetwork:
+       external: true
